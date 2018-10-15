@@ -2,7 +2,7 @@
   (:require [clojure.test :refer :all]
             [game-of-life.core :refer :all]))
 
-(def default-grid [["." "." "."]["." "." "."]["." "." "."]])
+(def default-grid [[false false false][false false false][false false false]])
 
 (deftest get-neighbors-returns-neighbors
   (is (= (get-neighbors default-grid [1 1]) 
@@ -16,3 +16,10 @@
   (is (= (get-neighbors default-grid [0 0]) 
          #{[1 0] [1 1] [0 1]})))
 
+(deftest count-live-neighbors-works
+  (is (= (count-live-neighbors [[true false] [true true]] [0 0]) 
+         2)))
+
+(deftest alive?-returns-false-with-less-than-two
+  (is (= (alive? [[true false] [false true]] [0 0]) 
+         false)))

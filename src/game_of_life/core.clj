@@ -12,6 +12,12 @@
          (filter #(>= (last %) 0))
          (set))))
 
+(defn count-live-neighbors [grid point] 
+  (let [neighbors (get-neighbors grid point) ]
+    (count (filter identity (map #(get-in grid %) neighbors)))))
+
+(defn alive? [grid point]
+  (>= (count-live-neighbors grid point) 2))
 
 
 (defn -main
