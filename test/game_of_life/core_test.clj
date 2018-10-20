@@ -28,14 +28,6 @@
   (is (= (alive? [[true true true] [true true true] [true true true]] [0 1]) 
          false)))
 
-(deftest alive?-returns-true-with-more-than-three-neighbors
-  (is (= (alive? [[true false true] [true true false]] [0 1]) 
-         false)))
-
-(deftest alive?-returns-true-with-more-than-three-neighbors
-  (is (= (alive? [[true false true] [true true false]] [0 1]) 
-         false)))
-
 (deftest alive?-returns-true-with-three-neighbors
   (is (= (alive? [[true false true] [true false false]] [0 1]) 
          true)))
