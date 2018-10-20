@@ -20,6 +20,22 @@
   (is (= (count-live-neighbors [[true false] [true true]] [0 0]) 
          2)))
 
-(deftest alive?-returns-false-with-less-than-two
+(deftest alive?-returns-false-with-less-than-two-neighbors
   (is (= (alive? [[true false] [false true]] [0 0]) 
          false)))
+
+(deftest alive?-returns-false-with-more-than-three-neighbors
+  (is (= (alive? [[true true true] [true true true] [true true true]] [0 1]) 
+         false)))
+
+(deftest alive?-returns-true-with-more-than-three-neighbors
+  (is (= (alive? [[true false true] [true true false]] [0 1]) 
+         false)))
+
+(deftest alive?-returns-true-with-more-than-three-neighbors
+  (is (= (alive? [[true false true] [true true false]] [0 1]) 
+         false)))
+
+(deftest alive?-returns-true-with-three-neighbors
+  (is (= (alive? [[true false true] [true false false]] [0 1]) 
+         true)))

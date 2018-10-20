@@ -17,7 +17,8 @@
     (count (filter identity (map #(get-in grid %) neighbors)))))
 
 (defn alive? [grid point]
-  (>= (count-live-neighbors grid point) 2))
+  (and (>= (count-live-neighbors grid point) 2)
+       (< (count-live-neighbors grid point) 4)))
 
 
 (defn -main
