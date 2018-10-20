@@ -31,3 +31,11 @@
 (deftest alive?-returns-true-with-three-neighbors
   (is (= (alive? [[true false true] [true false false]] [0 1]) 
          true)))
+
+(deftest alive?-returns-true-with-three-neighbors
+  (is (= (alive? [[true false true] [true false false]] [0 1]) 
+         true)))
+
+(deftest alive?-dead-cell-returns-false-with-two-neighbors
+  (is (= (alive? [[false true] [false true]] [0 0]) 
+         false)))
