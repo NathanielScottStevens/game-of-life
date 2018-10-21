@@ -41,7 +41,7 @@
          false)))
 
 (deftest map-grid-applies-function
-  (is (= (map-grid #(not %2) [[true false] [false true]]) 
+  (is (= (map-grid-indexed #(not %2) [[true false] [false true]]) 
          [[false true] [true false]])))
 
 (deftest run-step-returns-correct-results

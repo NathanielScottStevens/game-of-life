@@ -22,13 +22,24 @@
          (< num-of-neighbors 4))
     (= num-of-neighbors 3)))
 
-(defn map-grid [f v] 
-  (map 
-    (fn [itm] (map-indexed #(f [(itm 0) %1] %2) (itm 1)))
-    (map-indexed (fn [idx itm] (vector idx itm)) v)))
+(defn map-grid-indexed [func grid] 
+  "Maps grid with provided function. func should accept a vector
+  with the cell's index and the value of the cell."
+  (mapv 
+    (fn map-row [row] 
+      (let [row-index (row 0)
+            row-value (row 1)] 
+              (into [] 
+                    (map-indexed 
+                       (fn apply-func-to-value [cell-index cell-item] 
+                         (func [row-index cell-index] cell-item))
+                       row-value))))
+    (map-indexed 
+      (fn get-row-with-index [index item] (vector index item)) 
+      grid)))
 
 (defn run-step [grid]
-  (map-grid 
+  (map-grid-indexed
     (fn [idx itm] (alive? (count-live-neighbors grid idx) itm)) 
     grid))
 
