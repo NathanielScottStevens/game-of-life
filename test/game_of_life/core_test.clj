@@ -21,21 +21,29 @@
          2)))
 
 (deftest alive?-returns-false-with-less-than-two-neighbors
-  (is (= (alive? [[true false] [false true]] [0 0]) 
+  (is (= (alive? 1 true) 
          false)))
 
 (deftest alive?-returns-false-with-more-than-three-neighbors
-  (is (= (alive? [[true true true] [true true true] [true true true]] [0 1]) 
+  (is (= (alive? 4 true) 
          false)))
 
 (deftest alive?-returns-true-with-three-neighbors
-  (is (= (alive? [[true false true] [true false false]] [0 1]) 
+  (is (= (alive? 3 true) 
          true)))
 
-(deftest alive?-returns-true-with-three-neighbors
-  (is (= (alive? [[true false true] [true false false]] [0 1]) 
+(deftest alive?-returns-true-with-two-neighbors-when-alive
+  (is (= (alive? 2 true) 
          true)))
 
-(deftest alive?-dead-cell-returns-false-with-two-neighbors
-  (is (= (alive? [[false true] [false true]] [0 0]) 
+(deftest alive?-returns-false-with-two-neighbors-when-dead
+  (is (= (alive? 2 false) 
          false)))
+
+(deftest map-grid-applies-function
+  (is (= (map-grid #(not %2) [[true false] [false true]]) 
+         [[false true] [true false]])))
+
+(deftest run-step-returns-correct-results
+  (is (= (run-step [[true false true] [true true false] [false true true]]) 
+                   [[true false false] [true false false] [true true true]])))

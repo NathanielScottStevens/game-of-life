@@ -16,16 +16,19 @@
   (let [neighbors (get-neighbors grid point) ]
     (count (filter identity (map #(get-in grid %) neighbors)))))
 
-(defn alive? [grid point]
-  (let [cell-is-alive (get-in grid point)]
-    (if cell-is-alive 
-      (and (>= (count-live-neighbors grid point) 2)
-           (< (count-live-neighbors grid point) 4))
-      (and (= (count-live-neighbors grid point) 3)
-           (< (count-live-neighbors grid point) 4)))))
+(defn alive? [num-of-neighbors is-alive]
+  (if is-alive 
+    (and (>= num-of-neighbors 2)
+         (< num-of-neighbors 4))
+    (= num-of-neighbors 3)))
 
+(defn map-grid [f v] 
+  (map 
+    (fn [itm] (map-indexed #(f [(itm 0) %1] %2) (itm 1)))
+    (map-indexed (fn [idx itm] (vector idx itm)) v)))
 
-(defn -main
-  "I don't do a whole lot ... yet."
-  [& args]
-  (println "Hello, World!"))
+(defn run-step [grid]
+  (map-grid 
+    (fn [idx itm] (alive? (count-live-neighbors grid idx) itm)) 
+    grid))
+
